@@ -1,0 +1,150 @@
+Started by user Pranjal Wagh
+Obtained Jenkinsfile from git https://github.com/pranjalwagh/docker.git
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in C:\ProgramData\Jenkins\.jenkins\workspace\Docker
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git.exe rev-parse --resolve-git-dir C:\ProgramData\Jenkins\.jenkins\workspace\Docker\.git # timeout=10
+Fetching changes from the remote Git repository
+ > git.exe config remote.origin.url https://github.com/pranjalwagh/docker.git # timeout=10
+Fetching upstream changes from https://github.com/pranjalwagh/docker.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.44.0.windows.1'
+ > git.exe fetch --tags --force --progress -- https://github.com/pranjalwagh/docker.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git.exe rev-parse "refs/remotes/origin/main^{commit}" # timeout=10
+Checking out Revision 0b54c4e9a0d4a6fd0dc97d6fa803d1108ad4be8c (refs/remotes/origin/main)
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 0b54c4e9a0d4a6fd0dc97d6fa803d1108ad4be8c # timeout=10
+Commit message: "Update Jenkinsfile"
+ > git.exe rev-list --no-walk 95d3ad9796597676ecc41e8b682369438d209d61 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Docker>python --version 
+Python 3.12.2
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (login)
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Docker>docker login -u wagh9161 -p S@h1lwagh007 
+WARNING! Using --password via the CLI is insecure. Use --password-stdin.
+Login Succeeded
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Create Docker Image)
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Docker>docker build -t my-python-app . 
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 118B 0.1s done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/library/python:3.12.2
+#2 ...
+
+#3 [auth] library/python:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/python:3.12.2
+#2 DONE 1.8s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [1/3] FROM docker.io/library/python:3.12.2@sha256:19973e1796237522ed1fcc1357c766770b47dc15854eafdda055b65953fe5ec1
+#5 DONE 0.0s
+
+#6 [internal] load build context
+#6 transferring context: 27B done
+#6 DONE 0.0s
+
+#7 [2/3] WORKDIR /app
+#7 CACHED
+
+#8 [3/3] COPY app.py .
+#8 CACHED
+
+#9 exporting to image
+#9 exporting layers done
+#9 writing image sha256:c9d270a2056b6821276a780c3d487ebde4fbd6a38855ab8461be20a5e66b1d86 0.0s done
+#9 naming to docker.io/library/my-python-app done
+#9 DONE 0.0s
+WARNING: current commit information was not captured by the build: git was not found in the system: exec: "git.exe": executable file not found in %PATH%
+
+What's Next?
+  View a summary of image vulnerabilities and recommendations â†’ docker scout quickview
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Publish Docker Image)
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Docker>docker tag my-python-app wagh9161/assignment:latest 
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Docker>docker push wagh9161/assignment 
+Using default tag: latest
+The push refers to repository [docker.io/wagh9161/assignment]
+9fbf6c32f738: Preparing
+05644fb8e0dc: Preparing
+9adbc4b1428d: Preparing
+f52093e4f67d: Preparing
+1193f41e6b14: Preparing
+e077e19b6682: Preparing
+21e1c4948146: Preparing
+e077e19b6682: Waiting
+21e1c4948146: Waiting
+68866beb2ed2: Preparing
+e6e2ab10dba6: Preparing
+68866beb2ed2: Waiting
+e6e2ab10dba6: Waiting
+0238a1790324: Preparing
+0238a1790324: Waiting
+9adbc4b1428d: Layer already exists
+1193f41e6b14: Layer already exists
+05644fb8e0dc: Layer already exists
+f52093e4f67d: Layer already exists
+e077e19b6682: Layer already exists
+68866beb2ed2: Layer already exists
+21e1c4948146: Layer already exists
+9fbf6c32f738: Layer already exists
+0238a1790324: Layer already exists
+e6e2ab10dba6: Layer already exists
+latest: digest: sha256:d1123fbfabf03f9a1ec67524bdb3284a8337a15830f0f8833c04b4f30c7d15a0 size: 2420
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\Docker>docker run wagh9161/assignment 
+Hello, task got executed successfully.....
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

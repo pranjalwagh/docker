@@ -11,7 +11,7 @@ pipeline {
             steps {
 		script{
                 //bat 'docker build -t my-python-app .'
-		docker.build("wagh9161/assignment", "-t my-python-app .")
+		docker.build("wagh9161/assignment", "-f my-python-app .")
 		}
             }
         }

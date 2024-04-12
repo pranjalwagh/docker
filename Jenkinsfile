@@ -8,7 +8,7 @@ environment {
     stages {
         stage('Build') {
             steps {
-                sh 'python --version'
+                bat 'python --version'
             }
         }
         stage('Create Docker Image') {

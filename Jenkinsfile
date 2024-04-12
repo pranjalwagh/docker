@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                bar 'python --version'
+                bat 'python --version'
             }
         }
         stage('Create Docker Image') {

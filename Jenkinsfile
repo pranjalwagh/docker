@@ -4,12 +4,12 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'python --version'
+                python --version
             }
         }
         stage('Create Docker Image') {
             steps {
-                sh 'docker build -t my-python-app .'
+                bat 'docker build -t my-python-app .'
             }
         }
         stage('Publish Docker Image') {

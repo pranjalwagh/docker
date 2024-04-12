@@ -11,6 +11,13 @@ environment {
                 bat 'python --version'
             }
         }
+	stage('login') {
+            steps {
+                bat 'docker login'
+		bat 'wagh9161'
+		bat 'S@h1lwagh007'
+            }
+        }
         stage('Create Docker Image') {
             steps {
                 bat 'docker build -t my-python-app .'

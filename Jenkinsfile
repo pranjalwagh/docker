@@ -13,9 +13,7 @@ environment {
         }
 	stage('login') {
             steps {
-                bat 'docker login'
-		bat 'wagh9161'
-		bat 'S@h1lwagh007'
+                bat 'docker login -u wagh9161 -p S@h1lwagh007'
             }
         }
         stage('Create Docker Image') {
